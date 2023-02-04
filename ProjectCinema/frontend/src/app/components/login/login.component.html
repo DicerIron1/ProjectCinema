@@ -1,0 +1,23 @@
+<ion-content class="ion-padding">
+  <ion-grid>
+    <ion-row>
+      <ion-col offset="3" size="4">
+        <h1>Welcome,</h1>
+        <h3>Sign in to continue!</h3>
+        <form [formGroup]="loginForm" (ngSubmit)="submit()">
+          <div class="form-field">
+            <label [ngClass]="focused ? 'label-focused' : ''">Email ID</label>
+            <input formControlName="email"  type="email" (focus)="focused = true" (blur)="onBlur($event)" />
+          </div>
+          <div class="form-field">
+            <label [ngClass]="focused ? 'label-focused' : ''">Password</label>
+            <input formControlName="password"  type="password" (focus)="focused = true" (blur)="onBlur($event)" />
+          </div>
+          <button (click)="submit()" ></button>
+        </form>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
+
+
