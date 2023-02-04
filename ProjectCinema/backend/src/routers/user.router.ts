@@ -40,14 +40,13 @@ router.get('/:id/isAdmin',   asyncHandler(
 )
 const generateTokenResponse = (user : IUser) => {
     const token = jwt.sign({
-      id: user.id, email:user.email, isAdmin: user.isAdmin
+      id: user._id, name:user.name, isAdmin: user.isAdmin, isEventer: user.isEventer,
     },"pass123",{
       expiresIn:"30d"
     });
 
     return {
-      id: user.id,
-      email: user.email,
+      id: user._id,
       name: user.name,
       isAdmin: user.isAdmin,
       token: token
