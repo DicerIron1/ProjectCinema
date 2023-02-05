@@ -8,7 +8,7 @@ export interface ISession{
     description: string ;
     startingAt: Date;
     endingAt: Date;
-
+    published: boolean;
 }
 
 const Type = ['film','theatre','event']
@@ -18,6 +18,7 @@ export const SessionSchema = new Schema<ISession>({
     description:            {type: String, required: true},
     startingAt:             {type: Date,default: Date.now, required:true},
     endingAt:               {type: Date,default: Date.now, required:false},
+    published:              {type: Boolean,default: false, required:false},
 }, {
     timestamps: true,
     toJSON:{
