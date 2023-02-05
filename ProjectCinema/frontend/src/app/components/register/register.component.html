@@ -1,0 +1,32 @@
+<ion-content class="register-content ion-padding ">
+  <ion-grid>
+    <ion-row>
+      <ion-col offset="3" size="4">
+        <h1>Create Account,</h1>
+        <h3>Sign up to get started!</h3>
+
+        <form [formGroup]="registerForm" (ngSubmit)="submit()">
+          <div class="form-field">
+            <label [ngClass]="focused ? 'label-focused' : ''">Name</label>
+            <input formControlName="name"  type="email" (focus)="focused = true" (blur)="onBlur($event)" />
+          </div>
+          <div class="form-field">
+            <label [ngClass]="focused ? 'label-focused' : ''">Password</label>
+            <input formControlName="password"  type="Password" (focus)="focused = true" (blur)="onBlur($event)" />
+          </div>
+          <div class="form-field">
+            <label [ngClass]="focused ? 'label-focused' : ''">Confirm Password</label>
+            <input formControlName="confirmPassword" type="Password" (focus)="focused = true" (blur)="onBlur($event)" />
+          </div>
+          <div class="form-field">
+            <label [ngClass]="focused ? 'label-focused' : ''">Is Eventer</label>
+            <ion-checkbox formControlName="isEventer"></ion-checkbox>
+          </div>
+          <ion-button (click)="submit()"></ion-button>
+        </form>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
+
+
