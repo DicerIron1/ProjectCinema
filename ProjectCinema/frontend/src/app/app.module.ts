@@ -10,6 +10,7 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {LoginComponent} from "./components/login/login.component";
 import {HttpClientModule} from "@angular/common/http";
 import {RegisterComponent} from "./components/register/register.component";
+import {DashboardComponent} from "./components/dashboard/dashboard.component";
 
 
 @NgModule({
@@ -17,6 +18,7 @@ import {RegisterComponent} from "./components/register/register.component";
     AppComponent,
     LoginComponent,
     RegisterComponent,
+    DashboardComponent,
 
   ],
   imports: [
@@ -25,7 +27,7 @@ import {RegisterComponent} from "./components/register/register.component";
     AppRoutingModule,
     ReactiveFormsModule,
     FormsModule,
-    HttpClientModule,
+    HttpClientModule
   ],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],

@@ -1,7 +1,7 @@
 import {Schema, model} from 'mongoose';
 
 export interface ICity{
-    _id:string;
+    id:string;
     name:string;
     picture_ids: string[];
     responsible_ids: string[];

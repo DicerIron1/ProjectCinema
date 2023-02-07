@@ -1,7 +1,7 @@
 import {Schema, model} from 'mongoose';
 
 export interface IPhoto{
-    _id:string;
+    id:string;
     name:string;
     path: string;
 }

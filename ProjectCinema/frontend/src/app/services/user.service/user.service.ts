@@ -1,9 +1,8 @@
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable} from 'rxjs';
-import { tap} from 'rxjs/operators'
 import {
-  USER_LOGIN_URL, USER_REGISTER_URL
+  USER_LOGIN_URL, USER_REGISTER_URL, USER_URL
 } from '../../shared/constants/urls';
 import { IUserLogin } from '../../shared/models/IUserLogin';
 import { User } from '../../shared/models/User';
@@ -21,28 +20,26 @@ export class UserService {
   }
 
   login(userLogin:IUserLogin):Observable<User>{
-    return this.http.post<User>(USER_LOGIN_URL, userLogin).pipe(
-      tap({
-        next: (user) =>{
-          const currentUser = {id : user._id, name: user.name, email: user.email, token: user.token }
-          this.setUserToLocalStorage(currentUser);
-          this.isAdmin = user.isAdmin;
-        },
-        error: (errorResponse:Error) => {
-          console.log(errorResponse.message, 'Login Failed')
-        }
-      })
-    );
+    return this.http.post<User>(USER_LOGIN_URL, userLogin);
   }
-  /*logout(){
-    this.userSubject.next(new User());
-    this.isAdmin =false;
+  getIsCurrentUserAdmin(id:string): Observable<boolean> {
+    return this.http.get<boolean>(USER_URL +"/" + id + "/isAdmin")
+  }
+  logout(){
     localStorage.removeItem(USER_KEY);
-  }*/
-
-  private setUserToLocalStorage(user: { name:string, email:string, token:string}){
-    localStorage.setItem(USER_KEY, JSON.stringify(user));
   }
+  checkTokenValidity(token:string){
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Authorization': token
+      })
+    };
+    return this.http.get<boolean>(USER_URL + "/verifyAccess",httpOptions)
+  }
+
+  /*private setUserToLocalStorage(user: { name:string, email:string, token:string}){
+    localStorage.setItem(USER_KEY, JSON.stringify(user));
+  }*/
 
   /*private getUserFromLocalStorage():User{
     const userJson = localStorage.getItem(USER_KEY);

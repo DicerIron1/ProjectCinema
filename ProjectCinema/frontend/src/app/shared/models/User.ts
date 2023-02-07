@@ -1,7 +1,8 @@
 export class User{
-  _id:string;
-  email:string;
+  id:string;
   name:string;
-  token:string;
-  isAdmin: boolean;
+  token?:string;
+  isEventer: boolean;
+  city_id: string;
+  isAdmin?: boolean;
 }

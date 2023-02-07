@@ -1,7 +1,7 @@
 import {Schema, model} from 'mongoose';
 
 export interface IGender{
-    _id:string;
+    id:string;
     name:string;
 }
 

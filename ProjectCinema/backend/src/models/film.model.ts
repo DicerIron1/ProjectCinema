@@ -1,7 +1,7 @@
 import {Schema, model} from 'mongoose';
 
 export interface IFilm{
-    _id:string;
+    id:string;
     name:string;
     picture_ids: string[];
     actors_ids: string[];

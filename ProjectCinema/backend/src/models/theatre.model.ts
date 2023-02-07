@@ -1,7 +1,7 @@
 import {Schema, model} from 'mongoose';
 
 export interface ITheatre{
-    _id:string;
+    id:string;
     name:string;
     description:string ;
     location:string;

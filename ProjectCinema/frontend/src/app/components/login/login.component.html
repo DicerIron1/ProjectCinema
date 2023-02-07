@@ -6,8 +6,8 @@
         <h3>Sign in to continue!</h3>
         <form [formGroup]="loginForm" (ngSubmit)="submit()">
           <div class="form-field">
-            <label [ngClass]="focused ? 'label-focused' : ''">Email ID</label>
-            <input formControlName="email"  type="email" (focus)="focused = true" (blur)="onBlur($event)" />
+            <label [ngClass]="focused ? 'label-focused' : ''">Name </label>
+            <input formControlName="name"  type="name" (focus)="focused = true" (blur)="onBlur($event)" />
           </div>
           <div class="form-field">
             <label [ngClass]="focused ? 'label-focused' : ''">Password</label>

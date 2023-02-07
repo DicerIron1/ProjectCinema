@@ -1,7 +1,7 @@
 import {Schema, model} from 'mongoose';
 
 export interface IEvent{
-    _id:string;
+    id:string;
     name:string;
     location:string;
     picture_ids: string[];

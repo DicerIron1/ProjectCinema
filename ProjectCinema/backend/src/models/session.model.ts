@@ -2,7 +2,7 @@ import {Schema, model} from 'mongoose';
 
 
 export interface ISession{
-    _id:string;
+    id:string;
     type: string ;
     occasion_id: string;
     description: string ;
