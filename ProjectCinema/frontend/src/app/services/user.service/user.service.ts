@@ -1,4 +1,4 @@
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {HttpClient, HttpEvent, HttpHeaders, HttpResponse} from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable} from 'rxjs';
 import {
@@ -7,6 +7,7 @@ import {
 import { IUserLogin } from '../../shared/models/IUserLogin';
 import { User } from '../../shared/models/User';
 import {IUserRegister} from "../../shared/models/IUserRegister";
+import {HttpOptions} from "@capacitor/core";
 
 const USER_KEY = 'User';
 @Injectable({
@@ -14,7 +15,7 @@ const USER_KEY = 'User';
 })
 export class UserService {
   public isAdmin = false;
-
+  public httpOptions : any;
   constructor(private http:HttpClient,
   ) {
   }
@@ -28,26 +29,29 @@ export class UserService {
   logout(){
     localStorage.removeItem(USER_KEY);
   }
-  checkTokenValidity(token:string){
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Authorization': token
-      })
-    };
-    return this.http.get<boolean>(USER_URL + "/verifyAccess",httpOptions)
+  setTokenHeader(){
+    const userJson = localStorage.getItem(USER_KEY);
+    if(userJson ){
+      const user = JSON.parse(userJson) as User;
+      if(user.token){
+        this.httpOptions = {
+          headers: new HttpHeaders({
+            'Authorization': user.token
+          })
+        };
+      }
+    }
   }
 
-  /*private setUserToLocalStorage(user: { name:string, email:string, token:string}){
-    localStorage.setItem(USER_KEY, JSON.stringify(user));
-  }*/
+  checkTokenValidity(){
+    this.setTokenHeader()
+    return this.http.get<boolean>(USER_URL + "/verifyAccess",this.httpOptions)
+  }
 
-  /*private getUserFromLocalStorage():User{
-    const userJson = localStorage.getItem(USER_KEY);
-    if (userJson) {
-      return JSON.parse(userJson) as User
-    }
-    return new User();
-  }*/
+  getUsers(): Observable<HttpEvent<User[]>>{
+    return this.http.get<User[]>(USER_URL,this.httpOptions)
+  }
+
 
  /* private handleError(error: HttpErrorResponse) {
     console.error('server error:', error);
@@ -60,4 +64,5 @@ export class UserService {
   register(userRegiser:IUserRegister): Observable<User>{
     return this.http.post<User>(USER_REGISTER_URL, userRegiser);
   }
+
 }

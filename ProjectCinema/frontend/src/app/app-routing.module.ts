@@ -6,6 +6,7 @@ import {LoginAuthGuardGuard} from "./authenGuards/login/login.auth.guard.guard";
 import {UserAuthGuardGuard} from "./authenGuards/user/user.auth.guard.guard";
 import {DashboardComponent} from "./components/dashboard/dashboard.component";
 import {AuthGuardGuard} from "./authenGuards/logged/auth.guard.guard";
+import {UsersManagerComponent} from "./components/users-manager/users-manager.component";
 
 const routes: Routes = [
   {
@@ -21,7 +22,12 @@ const routes: Routes = [
   {
     path: 'anotherOne',
     component: RegisterComponent,
-    canActivate: [UserAuthGuardGuard],
+    canActivate: [AuthGuardGuard,UserAuthGuardGuard],
+  },
+  {
+    path: 'userManager',
+    component: UsersManagerComponent,
+    canActivate:[AuthGuardGuard,UserAuthGuardGuard],
   },
   {
     path: '',

@@ -9,7 +9,7 @@ const router = Router();
 
 router.get('/', asyncHandler( async (req, res) => {
         const users = await UserModel.find();
-        res.status(200).json({ users });
+        res.status(HTTP_SUCCESS_REQUEST).send( users );
     }
 ))
 
@@ -114,7 +114,8 @@ router.get('/verifyAccess',async (req, res) => {
     else{
         res.status(HTTP_BAD_REQUEST).send("no Token was sent");
     }
-    }
-)
+})
+
+
 
   export default router;
